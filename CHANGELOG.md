@@ -15,6 +15,9 @@ All notable changes to this project will be documented in this file.
 
 * Drop support for OAuth1
 
+### Features
+* Add OAuth2 authentication
+
 ### Refactor
 
 * Remove non essentials libraries: Cosmos and Cryptoswift
