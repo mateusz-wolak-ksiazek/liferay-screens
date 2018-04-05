@@ -129,7 +129,6 @@ open class LoginScreenlet: BaseScreenlet, BasicAuthBasedType {
 		copyAuthType()
 	}
 
-
 	override open func createInteractor(name: String, sender: AnyObject?) -> Interactor? {
 		let interactor: Interactor & LoginResult
 
