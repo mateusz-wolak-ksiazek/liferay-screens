@@ -111,48 +111,47 @@ open class AssetListPageLiferayConnector: PaginationLiferayConnector {
 	open func doGetRowCount(session: LRBatchSession, entryQuery: LRJSONObjectWrapper) {
 	}
 
-	open func configureEntryQuery() -> [String: AnyObject] {
+	open func configureEntryQuery() -> [String: Any] {
 		var entryQuery = (customEntryQuery != nil)
 			? customEntryQuery!
-			: [String: AnyObject]()
+			: [String: Any]()
 
-		let defaultValues = [
+		var defaultValues: [String: Any] = [
 			"classNameIds": NSNumber(value: classNameId! as Int64),
 			"groupIds": NSNumber(value: groupId! as Int64),
 			"visible": true
 		]
 
-		let finalValues = self.handleUserVisibleFlag(defaultValues)
+		if classNameId == AssetClasses.getClassNameId(AssetClassNameKey_DDLFormRecord) ||
+			classNameId == AssetClasses.getClassNameId(AssetClassNameKey_Layout) ||
+			classNameId == AssetClasses.getClassNameId(AssetClassNameKey_Organization) ||
+			classNameId == AssetClasses.getClassNameId(AssetClassNameKey_User) {
+				defaultValues = self.handleVisibleFlag(defaultValues)
+		}
 
 		// swiftlint:disable for_where
-		for (k, v) in finalValues {
+		for (k, v) in defaultValues {
 			if entryQuery[k] == nil {
 				entryQuery[k] = v
 			}
 		}
-		// swiftlint:enable for_where
 
 		return entryQuery
 	}
 
 	// MARK: Private methods
 
-	/// AssetListScreenlet only list Asset with visible attribute set to true. But User objects have it by
-	/// default in false. So this method update this attribute of entryQuery values to list
-	/// all users.
+	/// AssetListScreenlet only list Asset with visible attribute set to true. But for example User,
+	/// have it by default in true. This method update this attribute of entryQuery.
 	///
 	/// - parameter values: initial entryQuery values.
 	///
 	/// - returns: final values for entryQuery.
-	fileprivate func handleUserVisibleFlag(_ values: [String: AnyObject]) -> [String: AnyObject] {
-		if classNameId == AssetClasses.getClassNameId(AssetClassNameKey_User) {
+	fileprivate func handleVisibleFlag(_ values: [String: Any]) -> [String: Any] {
 			var newValues = values
-
-			newValues["visible"] = false as AnyObject?
+			newValues["visible"] = false
 
 			return newValues
-		}
-		return values
 	}
 }
 
