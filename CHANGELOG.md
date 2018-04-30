@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 ## iOS
 
 * Drop support for OAuth1
+* Update Showcase-swift demo app
 
 ### Refactor
 
