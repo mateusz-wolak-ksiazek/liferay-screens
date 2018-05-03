@@ -120,7 +120,7 @@ open class AssetClasses: NSObject {
 					"com.liferay.dynamic.data.lists.model.DDLRecordVersion"),
 
 			// Journal
-			AssetClassNameKey_JournalArticle: AssetClassEntry(29501, "com.liferay.journal.model.JournalArticle"),
+			AssetClassNameKey_JournalArticle: AssetClassEntry(29634, "com.liferay.journal.model.JournalArticle"),
 			AssetClassNameKey_JournalArticleImage: AssetClassEntry(29502,
 					"com.liferay.journal.model.JournalArticleImage"),
 			AssetClassNameKey_JournalFolder: AssetClassEntry(29506, "com.liferay.journal.model.JournalFolder"),
